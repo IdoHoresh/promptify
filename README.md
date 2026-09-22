@@ -1,6 +1,8 @@
 # promptify
 
-Type a rough prompt; promptify rewrites it for the Claude model your Claude Code session is running on, shows you the rewrite, and runs it, all in the same turn.
+**Every prompt, tailored to the Claude model you're actually running, following Anthropic's official, current prompting guidance.**
+
+Type a rough prompt in Claude Code. promptify detects which model the session is on, rewrites the prompt using Anthropic's best practices and that model's own prompting guide, shows you the rewrite, and runs it, all in the same turn. The rules come from Anthropic's documentation: the prompting best practices, the per-model prompting guides and the migration guides, checked against the complete Claude Platform docs on 2026-09-23. promptify is an independent project, not made or endorsed by Anthropic.
 
 Most prompts were written for older Claude models. Opus 5.5 is Anthropic's default model now, and it reacts differently. promptify rewrites your prompt for it:
 
@@ -10,7 +12,7 @@ Most prompts were written for older Claude models. Opus 5.5 is Anthropic's defau
 - **Pasted text can carry hidden instructions.** promptify marks pasted content so the model treats it as data, not orders.
 - **Frontend output looks the same every time.** promptify names the default styles to skip (cream backgrounds, pill buttons, numbered section labels) so you get an actual design.
 
-It does the same for Opus 5, Opus 4.8, Sonnet 5, Fable 5, Fable 5.1 and Mythos, each with its own rules. You see every rewrite, and it runs right away.
+Every other current model gets the same treatment from its Anthropic guide: Opus 5, Opus 4.8, Sonnet 5, Fable 5 and Fable 5.1, with Mythos following the Fable guides. You see every rewrite, and it runs right away.
 
 ## Install
 
