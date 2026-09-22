@@ -1,6 +1,6 @@
 ---
 type: regex
 target: trace
-pattern: '(not a code change|don.t (change|fix|apply|modify)|without (changing|fixing|applying)|diagnosis)'
+pattern: "Report what you find and stop; don.t change code until I ask"
 flags: i
 ---

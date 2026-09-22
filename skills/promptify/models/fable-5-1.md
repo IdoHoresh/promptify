@@ -22,8 +22,9 @@ Overrides of Fable 5 bullets:
   a possible model switch, and name the producing model when a flagged-domain answer matters.
 - **Pause boundary (extends "State the pause boundary").** 5.1 can end a turn by describing
   the next step ("Next, I'll …") or asking permission for a step the request already covered
-  ("Shall I apply this?"). For unattended or long autonomous runs, add the guide's two blocks
-  verbatim; if prompt length must stay short, the first alone keeps most of the effect. Its
+  ("Shall I apply this?"). For unattended or long autonomous runs (cues include "I'll check in
+  the morning," "while I'm away," "overnight," "run it without me"), add the guide's two
+  blocks verbatim; if prompt length must stay short, the first alone keeps most of the effect. Its
   opening sentence carries much of that effect, so keep it as written, and immediately after
   it list any confirmations the harness still requires (Claude Code asks before hard-to-reverse
   or outward-facing actions) so the two rules don't collide. First block:

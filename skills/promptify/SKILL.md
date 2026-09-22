@@ -54,8 +54,9 @@ them.
   one: "fix X," "change X."
 - **A question gets an assessment, not a change.** The inverse of the bullet above: when the
   draft asks why something happens, whether something is right, or to "look into" something,
-  without asking for a change, the deliverable is findings. Say so in the rewrite: "report what
-  you find and stop; don't change code until I ask." (Anthropic's general form of this is its
+  without asking for a change, the deliverable is findings. End the rewrite with this sentence,
+  word for word: "Report what you find and stop; don't change code until I ask." (Anthropic's
+  general form of this is its
   do-not-act-before-instructions pattern.) Don't add a conditional "fix it if it's safe" — that
   turns a question into a change the user didn't request.
 - **Why, not just what.** When the draft states a request with no motivation behind it, add the
@@ -194,3 +195,6 @@ Where a later file overrides an earlier one, the later file wins. Don't read the
 
 Show the rewritten version to the user in a fenced block before proceeding, one line on what
 changed and why (skip the line if nothing meaningful changed), then execute it as the task.
+Put the rewrite in regular reply text the user reads in full, not in a brief progress note
+between tool calls: some models and clients shorten those notes to a one-line summary, which
+would hide the rewrite.

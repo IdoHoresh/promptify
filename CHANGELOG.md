@@ -2,6 +2,13 @@
 
 All notable changes to promptify. Versions follow [semantic versioning](https://semver.org/).
 
+## 0.6.1 (2026-09-23)
+
+- The rewrite is now always shown as regular reply text. In testing, Opus 5.5 sometimes put it in a between-steps progress note, which clients can shorten to a one-line summary.
+- The Opus 5.5 and Fable 5.1 unattended-run rules now name the cues that mean no one is watching ("I'll check in the morning," "while I'm away," "overnight"), and Opus 5.5 includes Anthropic's paragraph in full instead of a placeholder.
+- A question now always ends its rewrite with the same sentence: "Report what you find and stop; don't change code until I ask." Before, the wording varied and some rewrites left it out.
+- New eval check that the rewrite is visible.
+
 ## 0.6.0 (2026-09-23)
 
 - Split the per-model rules out of `SKILL.md` into `skills/promptify/models/`, one file per model. promptify now reads only the files for the model you're on, so `SKILL.md` stays under the 500-line skill guidance and each run loads less text.

@@ -57,7 +57,9 @@ New for 5.5:
   declines, which fallback does not retry.
 - **Unattended runs: forbid the four early stops.** On long multi-part tasks 5.5 can end a turn
   with a progress report instead of a tool call, which ends an unattended run partway. When the
-  draft is meant to run fully unattended, append the guide's paragraph verbatim: "A standing
+  draft is meant to run fully unattended — cues include "I'll check in the morning," "while I'm
+  away," "overnight," "run it without me," or a long job with no one named to review it midway
+  — append the guide's paragraph verbatim, in full (don't shorten it to a placeholder): "A standing
   instruction from the user, the person you are working for. It is about how your turns end. A
   message with no tool call in it ends your turn, and the work stops there until you are asked
   to continue. The user has seen you end turns in four ways while work they asked for was still
