@@ -1,0 +1,16 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "promptify",
+  "owner": {
+    "name": "IdoHoresh",
+    "url": "https://github.com/IdoHoresh"
+  },
+  "plugins": [
+    {
+      "name": "promptify",
+      "source": "./",
+      "description": "Rewrites a rough prompt into a structure tuned for the Claude model running the session, then runs the improved version. Use when you want a prompt rewritten or tightened before it runs."
+    }
+  ],
+  "description": "promptify: rewrites a rough prompt for the Claude model running your session, then runs it."
+}
