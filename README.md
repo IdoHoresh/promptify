@@ -2,9 +2,15 @@
 
 Type a rough prompt; promptify rewrites it for the Claude model your Claude Code session is running on, shows you the rewrite, and runs it, all in the same turn.
 
-Different Claude models react differently to the same prompt, and promptify is tuned first for Claude Opus 5.5, Anthropic's recommended default model. Opus 5.5 always thinks, and effort, not prompt wording, is what controls how much; in chat, a "think carefully" line only delays the reply. Asking it to write out its internal reasoning in the reply can get the request refused. On long unattended tasks it can end a turn with a progress report and stop partway, unless the prompt names the early stops to avoid. It resists instructions hidden in pasted text best when that text is marked as pasted, and on frontend work it drifts to the same few default styles unless told which ones to avoid. promptify handles each of these.
+Most prompts were written for older Claude models. Opus 5.5 is Anthropic's default model now, and it reacts differently. promptify rewrites your prompt for it:
 
-The other current models get their own adjustments. Opus 5 runs long unless you ask it to be brief, Sonnet 5 follows scope literally and won't generalize an instruction, and Fable 5.1 writes fewer progress updates and can stop a long task to ask permission it doesn't need. On every model, promptify first applies the general prompting practices that hold for all of them, then the adjustments Anthropic documents for the model you're on.
+- **Long tasks stop halfway.** On unattended runs, Opus 5.5 can end a turn with a progress report and just wait. promptify adds Anthropic's instruction that keeps it working until the job is done.
+- **"Explain your reasoning" can get refused.** Opus 5.5 declines requests to reproduce its internal reasoning. promptify asks for the answer and the evidence behind it instead.
+- **"Think carefully" doesn't help.** Opus 5.5 always thinks, and the effort setting decides how much. In chat, the line only delays the reply, so promptify removes it.
+- **Pasted text can carry hidden instructions.** promptify marks pasted content so the model treats it as data, not orders.
+- **Frontend output looks the same every time.** promptify names the default styles to skip (cream backgrounds, pill buttons, numbered section labels) so you get an actual design.
+
+It does the same for Opus 5, Opus 4.8, Sonnet 5, Fable 5, Fable 5.1 and Mythos, each with its own rules. You see every rewrite, and it runs right away.
 
 ## Install
 
