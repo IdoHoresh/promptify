@@ -2,7 +2,9 @@
 
 Type a rough prompt; promptify rewrites it for the Claude model your Claude Code session is running on, shows you the rewrite, and runs it, all in the same turn.
 
-Different Claude models react differently to the same prompt. Opus 5 runs long unless you ask it to be brief, Sonnet 5 follows scope literally and won't generalize an instruction, and Fable 5.1 writes fewer progress updates and can stop a long task to ask permission it doesn't need. promptify applies the general prompting practices that hold for every current model, then the adjustments Anthropic documents for the model you're on.
+Different Claude models react differently to the same prompt, and promptify is tuned first for Claude Opus 5.5, Anthropic's recommended default model. Opus 5.5 always thinks, and effort, not prompt wording, is what controls how much; in chat, a "think carefully" line only delays the reply. Asking it to write out its internal reasoning in the reply can get the request refused. On long unattended tasks it can end a turn with a progress report and stop partway, unless the prompt names the early stops to avoid. It resists instructions hidden in pasted text best when that text is marked as pasted, and on frontend work it drifts to the same few default styles unless told which ones to avoid. promptify handles each of these.
+
+The other current models get their own adjustments. Opus 5 runs long unless you ask it to be brief, Sonnet 5 follows scope literally and won't generalize an instruction, and Fable 5.1 writes fewer progress updates and can stop a long task to ask permission it doesn't need. On every model, promptify first applies the general prompting practices that hold for all of them, then the adjustments Anthropic documents for the model you're on.
 
 ## Install
 
@@ -138,8 +140,8 @@ What changed: the draft was a question, so the rewrite asks for findings, not a 
 
 | Model | Main adjustments |
 |---|---|
+| Opus 5.5 | The main target, and it builds on the Opus 5 rules. Removes "think carefully" lines from chat-style prompts and requests to reproduce its internal reasoning (these can be refused), re-tests crop/zoom scaffolding for images, and adds Anthropic's paragraphs for unattended runs, multi-app exploration, pasted text and frontend defaults. |
 | Opus 5 | Limits unneeded subagents, asks for brevity explicitly, sets an update cadence on long runs, drops verification instructions (Opus 5 verifies on its own). |
-| Opus 5.5 | Builds on Opus 5. Removes "think carefully" lines from chat-style prompts and requests to reproduce its internal reasoning (these can be refused), re-tests crop/zoom scaffolding for images, and adds Anthropic's paragraphs for unattended runs, multi-app exploration, pasted text and frontend defaults. |
 | Opus 4.8 | Closer to Sonnet 5 than to Opus 5: literal scope, a think-it-through nudge at lower effort, explicit fan-out for parallel work, a concrete visual spec for frontend work. |
 | Sonnet 5 | Explicit scope, a think-it-through nudge only at low or medium effort, no progress-update scaffolding, tone stated only when it differs from the default. |
 | Fable 5 | Flags refusal-prone phrasing (cyber, bio and similar), pins scope, asks for grounded progress claims and periodic fresh-subagent checks on long runs, sets a pause boundary for unattended work. |
