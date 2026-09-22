@@ -1,7 +1,7 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "promptify",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Rewrites a rough prompt into a structure tuned for the Claude model running the session, then runs the improved version. Use when you want a prompt rewritten or tightened before it runs.",
   "author": {
     "name": "IdoHoresh",

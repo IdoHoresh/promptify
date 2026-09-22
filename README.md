@@ -23,9 +23,33 @@ In Claude Code:
 /plugin install promptify@promptify
 ```
 
-The command is then `/promptify:promptify`. The `@promptify` part names the marketplace, not a version, and it's required. To update later, run `/plugin marketplace update promptify`.
+The `@promptify` part names the marketplace, not a version, and it's required. Then type `/promptify`, or the full name `/promptify:promptify` if another command already uses `/promptify`.
 
-To install it as a plain `/promptify` command instead, copy the body of `skills/promptify/SKILL.md` into `~/.claude/commands/promptify.md`, keeping a frontmatter with `description` and `argument-hint`.
+To update to a new version:
+
+```
+/plugin marketplace update promptify
+/plugin update promptify@promptify
+```
+
+### For a team
+
+To have Claude Code offer promptify to everyone who opens a repository, add this to the repository's `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "promptify": {
+      "source": { "source": "github", "repo": "IdoHoresh/promptify" }
+    }
+  },
+  "enabledPlugins": {
+    "promptify@promptify": true
+  }
+}
+```
+
+Team members get it once they trust the project folder.
 
 ## Usage
 
@@ -167,19 +191,34 @@ A few bullets go beyond the guides with practical observations, for example that
 
 ## Cost
 
-Nothing loads until you invoke it (`disable-model-invocation: true`). Each run adds the full instruction set, about 52 KB (roughly 13k tokens), to that turn.
+Nothing loads until you invoke it (`disable-model-invocation: true`). A run loads the core instructions (about 15 KB) plus the rule file(s) for your model (about 3.5 KB for Sonnet 5, 11.5 KB for Opus 5.5, 20 KB for Fable 5.1), so roughly 5–9k tokens for that turn, down from about 13k when everything was one file.
+
+## Tests
+
+`evals/` holds a suite for `claude plugin eval`: one case each for Opus 5.5, Fable 5.1 and Sonnet 5, which checks that the right rule file loads and that the rewrite has the expected shape, plus a case for a model with no rule file and one confirming promptify never fires on its own. Run it from the repository root:
+
+```
+claude plugin eval .
+```
+
+Each case runs three times with and without the plugin, on your own account, so a full run costs real usage.
 
 ## Limitations
 
-- There are no automated evals yet. Anthropic's skill guidance suggests three or more test cases per model, including cases where the skill shouldn't fire.
 - The rewrite runs immediately. If a rewrite reads the draft wrong, interrupt it and re-run with a clearer draft.
 - API settings (effort, `max_tokens`, thinking display) aren't something a prompt rewrite can change. Where they matter, promptify points them out instead of trying to work around them.
 
-## Maintenance
+## Layout
 
-The instructions are one file, `skills/promptify/SKILL.md`. It stays a single file on purpose: Anthropic's 500-line skill-size guidance is aimed at skills that load automatically, and this one only loads when invoked. Splitting it would also multiply the copies that have to stay in sync.
+```
+skills/promptify/SKILL.md       core rules, model detection, and which rule file to read
+skills/promptify/models/*.md    one rule file per model, read on demand
+evals/                          test cases for claude plugin eval
+CHANGELOG.md                    changes per version
+scripts/build-single-file.py    builds a single-file /promptify command for use without the plugin
+```
 
-If you keep a personal `/promptify` command as well, it has the same body under a shorter frontmatter. Edit one, copy the body to the other, and diff everything after the frontmatter to confirm they match.
+`SKILL.md` stays under Anthropic's 500-line guidance, and the per-model rules are supporting files it names explicitly, so each run reads only what the current model needs. Bump `version` in `.claude-plugin/plugin.json` and add a `CHANGELOG.md` entry whenever the skill changes; installed copies only update when the version changes.
 
 ## License
 
